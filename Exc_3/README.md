@@ -8,21 +8,21 @@ We are also going to add a PostgreSQL database to this project.
 The database shall be started as a docker container.
 
 ## Todo
-- [ ] Start a PostgreSQL docker container (`postgres:18`) using plain docker commands
+- [x] Start a PostgreSQL docker container (`postgres:18`) using plain docker commands
     - Use environment variables in db
     - Map the PostgreSQL storage (`/var/lib/postgresql/18/docker`) to a Docker volume to make it persistent
     - Connect a database viewer to the db ([GoLand](https://www.jetbrains.com/help/go/quick-start-with-database-functionality.html), [VSCode](https://marketplace.visualstudio.com/items?itemName=ms-ossdata.vscode-pgsql), [DBeaver](https://dbeaver.io/))
-- [ ] Prepopulate database in code
-- [ ] Create multi-stage Dockerfile
+- [x] Prepopulate database in code
+- [x] Create multi-stage Dockerfile
     - First stage (`builder`) should compile the application
         - Use `golang:1.25` as base image for the `builder` stage
         - During the first stage copy all contents to `/app` directory and execute the `scripts/build-application.sh` script
         - The `script/build-application.sh` creates a binary located at `/app/ordersystem`
       - Second stage should copy the compiled binary from `builder` and start the application on container run
           - Use `alpine` as base image for the `run` stage
-- [ ] Build & run Orderservice container
+- [x] Build & run Orderservice container
   - Use environment variables in oderservice
-- [ ] Create scripts containing all commands you needed to build and run the orderservice as container and start the database.
+- [x] Create scripts containing all commands you needed to build and run the orderservice as container and start the database.
 
 Environment variables:
 

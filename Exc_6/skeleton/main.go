@@ -40,7 +40,7 @@ func main() {
 	r.Use(middleware.Logger)
 	// allow local cors
 	r.Use(cors.Handler(cors.Options{
-		AllowedOrigins:   []string{"http://localhost", "http://localhost:3000"},
+		AllowedOrigins:   []string{"http://localhost", "http://localhost:3000", "http://localhost:8085", "http://orders.localhost"},
 		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
 		AllowedHeaders:   []string{"Accept", "Authorization", "Content-Type", "Origin", "cache-control", "expires", "pragma"},
 		ExposedHeaders:   []string{"Content-Disposition"},

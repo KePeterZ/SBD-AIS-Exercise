@@ -7,9 +7,11 @@ networks:
 volumes:
   order_pg_vol:
   # todo
+  order_minio_vol:
 
 services:
   traefik:
+    container_name: traefik
     image: "traefik:v3.5.2"
     security_opt:
       - no-new-privileges:true
@@ -26,8 +28,10 @@ services:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
     networks:
       - web
+    restart: unless-stopped
 
   orderservice:
+    container_name: orderservice
     build: .
     restart: unless-stopped
     command: [ "/app/ordersystem" ]
@@ -50,6 +54,7 @@ services:
       - web
 
   sws:
+    container_name: sws
     image: joseluisq/static-web-server:latest
     environment:
       - SERVER_PORT=80
@@ -65,6 +70,7 @@ services:
       - web
 
   order-postgres:
+    container_name: order-postgres
     image: postgres:18
     volumes:
       - order_pg_vol:/var/lib/postgresql
@@ -80,9 +86,17 @@ services:
       - PGPORT=5555
 
   order-minio:
-    # todo use minio/minio:latest as image
-    # expose 8500
-    # add to network intercom
-    # use the following commands: "server", "--address", ":8500", "/data"
-    # map the data volume
-    # set environment variables MINIO_ROOT_USER and MINIO_ROOT_PASSWORD
+    container_name: order-minio
+    image: minio/minio:latest
+    command: ["server", "/data", "--address", ":8500", "--console-address", ":42143"]
+    environment:
+      - MINIO_ROOT_USER=root
+      - MINIO_ROOT_PASSWORD=verysecret
+    volumes:
+      - order_minio_vol:/data
+    ports:
+      - "8500:8500"      # API
+      - "42143:42143"    # Web console
+    networks:
+      - intercom
+    restart: unless-stopped

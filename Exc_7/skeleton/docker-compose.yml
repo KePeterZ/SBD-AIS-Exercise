@@ -109,7 +109,7 @@ services:
       labels:
         - traefik.enable=true
         - traefik.http.routers.orders.rule=Host(`orders.localhost`)
-        - traefik.http.services.orders.loadbalancer.server.port=8080
+        - traefik.http.services.orders.loadbalancer.server.port=3000
 
 
   #####################################################

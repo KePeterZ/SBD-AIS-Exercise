@@ -13,7 +13,7 @@ The gRPC server should be able to serve the following routes:
 - `GetDrinks`
 - `GetOrders`
 
-- [ ] Create a protobuf definition
+- [x] Create a protobuf definition
 - [ ] Generate a Go client and server
 - [ ] Implement the `OrderServiceServer` interface with all it's functions (`OrderDrink`, `GetDrinks`, `GetOrders`)
   - Make sure to embed `pb.UnimplementedOrderServiceServer` in your server struct for forward compatibility
